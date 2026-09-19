@@ -1,0 +1,495 @@
+/* ==========================================================================
+   MODAL B2B OPERACIONAL - STYLE GUIDE COMPLIANT
+   ========================================================================== */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(41, 67, 58, 0.45);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 18px;
+    box-sizing: border-box;
+}
+
+.modal-backdrop.active {
+    display: flex;
+}
+
+.modal-card {
+    background-color: var(--white, #fffefb);
+    border: 1px solid var(--border, #d9ded5);
+    border-radius: 18px;
+    max-width: 480px;
+    width: 100%;
+    padding: 36px 32px;
+    box-shadow: none; /* Flat design estricto */
+    box-sizing: border-box;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--foreground, #29433a);
+    margin: 6px 0 0 0;
+    line-height: 1.2;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--text-secondary, #65756c);
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 0.15s ease;
+}
+
+.modal-close:hover {
+    color: var(--foreground, #29433a);
+}
+
+.modal-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary, #65756c);
+    margin-bottom: 22px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field label {
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    color: var(--foreground, #29433a);
+    text-transform: uppercase;
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--border, #d9ded5);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--foreground, #29433a);
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    border-color: var(--foreground, #29433a);
+}
+
+.modal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.button-ghost {
+    background: transparent;
+    color: var(--text-secondary, #65756c);
+    border: none;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.button-ghost:hover {
+    color: var(--foreground, #29433a);
+}
+
+.form-status {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+    min-height: 18px;
+    margin-top: 4px;
+}
+
+.form-status.success {
+    color: var(--foreground, #29433a);
+}
+
+.form-status.error {
+    color: var(--clay, #b87859);
+}
+
+@media (max-width: 780px) {
+    .modal-card {
+        padding: 28px 20px;
+    }
+    .modal-title {
+        font-size: 19px;
+    }
+    .modal-actions {
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+    .modal-actions .button {
+        width: 100%;
+    }
+}
+
+:root {
+    /* Paleta base oficial (Style Guide) */
+    --background: #f8f7f2;
+    --foreground: #29433a;
+    --forest: #29433a;
+    --sage: #dfe9dc;
+    --viajeros-bg: #eee9df;
+    --text-secondary: #65756c;
+    --white: #fffefb;
+    --border: #d9ded5;
+    --dark-hover: #416253;
+    --accent-peach: #efc5a6;
+    --clay: #b87859;
+
+    /* Tipografía */
+    --font-main: 'Geist', Arial, sans-serif;
+    --font-serif: Georgia, serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* 10. Secciones para agencias y viajeros */
+.split-section {
+    width: 100%;
+    font-family: var(--font-main);
+    background-color: transparent;
+}
+
+.split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 620px;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+/* Contenedor base de medios con fondo blanco */
+.split-media {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Enmarcado exacto del UI Design */
+.media-agencias-wrapper {
+    padding: 50px 0 50px clamp(32px, 5vw, 64px);
+}
+
+.media-viajeros-wrapper {
+    padding: 50px clamp(32px, 5vw, 64px) 50px 0;
+}
+
+/* Dimensiones y tratamiento fotográfico */
+.media-img {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    max-height: 520px;
+    object-fit: cover;
+    display: block;
+}
+
+.img-agencias {
+    filter: saturate(0.7);
+}
+
+.img-viajeros {
+    filter: saturate(0.55) hue-rotate(8deg);
+}
+
+/* Paneles de contenido */
+.split-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px clamp(40px, 6vw, 135px);
+}
+
+.bg-sage {
+    background-color: var(--sage);
+}
+
+.bg-travelers {
+    background-color: var(--viajeros-bg);
+}
+
+/* Escala tipográfica */
+.eyebrow {
+    font-size: 10px;
+    font-weight: 650;
+    line-height: 1.4;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--foreground);
+    margin-bottom: 18px;
+    display: inline-block;
+}
+
+.split-title {
+    font-size: clamp(39px, 5.3vw, 70px);
+    font-weight: 420;
+    line-height: 1.02;
+    letter-spacing: -0.06em;
+    color: var(--foreground);
+    margin: 0 0 20px 0;
+}
+
+.split-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent-peach);
+    letter-spacing: normal;
+}
+
+.split-description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    max-width: 420px;
+    margin: 0;
+}
+
+/* Lista de verificación */
+.split-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 34px 0;
+    display: grid;
+    gap: 13px;
+}
+
+.split-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--foreground);
+}
+
+.check-circle {
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    border: 1px solid rgba(41, 67, 58, 0.35);
+    flex-shrink: 0;
+    background-color: transparent;
+}
+
+/* Botones y enlaces */
+.split-action {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button-dark {
+    background-color: var(--forest);
+    color: var(--white);
+}
+
+.button-dark:hover {
+    background-color: var(--dark-hover);
+    transform: translateY(-2px);
+}
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid currentColor;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.text-link:hover {
+    transform: translateX(3px);
+}
+
+.lang-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: var(--font-main);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    background-color: transparent;
+    border: 1px solid rgba(41, 67, 58, 0.35);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.lang-pill:hover {
+    background-color: var(--sage);
+    transform: translateY(-1px);
+}
+
+/* Sección Rutas Destino (Idea 3) */
+.section-rutas {
+    padding: 100px 24px;
+    background-color: var(--background);
+    border-top: 1px solid var(--border);
+}
+
+.container-rutas {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0 32px 0;
+}
+
+.filter-tab {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.filter-tab.active {
+    background-color: var(--foreground);
+    border-color: var(--foreground);
+    color: var(--white);
+}
+
+.routes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.route-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px;
+}
+
+.route-card h4 {
+    color: var(--foreground);
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.route-card p {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.routes-highlight {
+    animation: pulseRoute 1.4s ease;
+}
+
+@keyframes pulseRoute {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive: 780px */
+@media (max-width: 780px) {
+    .split-grid {
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .section-agencias .split-content,
+    .section-viajeros .split-content {
+        order: 1;
+        padding: 60px 24px 40px 24px;
+    }
+
+    .section-agencias .media-agencias-wrapper,
+    .section-viajeros .media-viajeros-wrapper {
+        order: 2;
+        padding: 16px 20px 48px 20px;
+        height: auto;
+    }
+
+    .media-img {
+        min-height: 280px;
+        max-height: 320px;
+        border-radius: 12px;
+    }
+
+    .split-title {
+        font-size: clamp(34px, 8vw, 42px);
+        margin-bottom: 16px;
+    }
+}
