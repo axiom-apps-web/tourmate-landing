@@ -1,154 +1,96 @@
 /**
- * TourMate - Unified i18n & Dual Modal Engine
+ * i18n.js â€” TourMate internationalization module
+ * NexumDevs Â· UPC 2026
+ *
+ * Loads EN/ES translations from JSON files and applies them
+ * to all elements with a data-i18n attribute.
  */
-const DEFAULT_LANG = 'en';
-let currentLang = localStorage.getItem('tourmate_lang') || DEFAULT_LANG;
-let dict = {};
 
-// 1. Navegación recursiva compacta
-const getNested = (obj, path) => path.reduce((o, k) => (o ? o[k] : null), obj);
+let currentLang = 'en';
+let translations = {};
 
-// 2. Carga asíncrona de diccionario y renderizado DOM
-async function setLanguage(lang) {
-    try {
-        const res = await fetch(`assets/i18n/${lang}.json`);
-        dict = await res.json();
-        currentLang = lang;
-        localStorage.setItem('tourmate_lang', lang);
-        document.documentElement.lang = lang;
-
-        // Traducir innerHTML
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const val = getNested(dict, el.getAttribute('data-i18n').split('.'));
-            if (val) el.innerHTML = val;
-        });
-
-        // Traducir atributos (placeholder, alt, etc.)
-        document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-            const [attr, keyPath] = el.getAttribute('data-i18n-attr').split(':');
-            const val = getNested(dict, keyPath.split('.'));
-            if (val) el.setAttribute(attr, val);
-        });
-
-        // Botón toggle de idioma
-        const btn = document.getElementById('langToggle');
-        if (btn) btn.textContent = dict.lang_btn || (lang === 'en' ? 'ES' : 'EN');
-    } catch (err) {
-        console.error('Error loading translations:', err);
+/**
+ * Flattens a nested object into dot-notation keys.
+ * e.g. { nav: { tourists: "Tourists" } } â†’ { "nav.tourists": "Tourists" }
+ */
+function flattenTranslations(obj, prefix = '') {
+  return Object.keys(obj).reduce((acc, key) => {
+    const fullKey = prefix ? `${prefix}.${key}` : key;
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      Object.assign(acc, flattenTranslations(obj[key], fullKey));
+    } else {
+      acc[fullKey] = obj[key];
     }
+    return acc;
+  }, {});
 }
 
-// 3. Inicialización
-document.addEventListener('DOMContentLoaded', async () => {
-    // Carga de fragmento HTML de modales si no está en el DOM
-    const modalContainer = document.getElementById('modalContainer');
-    if (modalContainer && !document.getElementById('demoModal')) {
-        try {
-            const modalRes = await fetch('assets/html/modal-demo.html');
-            if (modalRes.ok) {
-                modalContainer.innerHTML = await modalRes.text();
-            }
-        } catch (e) {
-            console.error('Error loading modal templates:', e);
-        }
+/**
+ * Loads a JSON translation file for the given language code.
+ * @param {string} lang - 'en' or 'es'
+ * @returns {Promise<object>} flattened translations object
+ */
+async function loadTranslations(lang) {
+  const response = await fetch(`assets/i18n/${lang}.json`);
+  const data = await response.json();
+  return flattenTranslations(data);
+}
+
+/**
+ * Applies the loaded translations to all [data-i18n] elements in the DOM.
+ */
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[key] !== undefined) {
+      if (key.endsWith('_html')) {
+        el.innerHTML = translations[key];
+      } else {
+        el.textContent = translations[key];
+      }
     }
+  });
+}
 
-    await setLanguage(currentLang);
+/**
+ * Toggles the language between EN and ES, updates the navbar button,
+ * and announces the change to screen readers.
+ */
+async function toggleLanguage() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  translations = await loadTranslations(currentLang);
+  applyTranslations();
 
-    // Toggle de Idioma
-    document.getElementById('langToggle')?.addEventListener('click', () => {
-        setLanguage(currentLang === 'en' ? 'es' : 'en');
-    });
+  // update navbar toggle button labels
+  const langCode = document.getElementById('lang-code');
+  const langFlag = document.getElementById('lang-flag');
+  const langBtn  = document.getElementById('lang-toggle-btn');
 
-    // Función genérica para abrir y cerrar modales
-    const toggleModal = (modalId, show) => {
-        const modal = document.getElementById(modalId);
-        if (!modal) return;
-        modal.classList.toggle('active', show);
-        modal.setAttribute('aria-hidden', !show);
-        document.body.style.overflow = show ? 'hidden' : '';
-        if (!show) {
-            const form = modal.querySelector('form');
-            const status = modal.querySelector('.form-status');
-            if (form) form.reset();
-            if (status) status.textContent = '';
-        }
-    };
+  if (currentLang === 'es') {
+    if (langCode) langCode.textContent = 'EN';
+    if (langFlag) langFlag.textContent = 'ðŸ‡ºðŸ‡¸';
+    if (langBtn)  langBtn.setAttribute('aria-label', 'Switch to English');
+  } else {
+    if (langCode) langCode.textContent = 'ES';
+    if (langFlag) langFlag.textContent = 'ðŸ‡µðŸ‡ª';
+    if (langBtn)  langBtn.setAttribute('aria-label', 'Switch to Spanish');
+  }
 
-    // Modal 1: Apertura desde botón "Hablemos →"
-    document.querySelectorAll('a[href="#contacto"], .button-dark').forEach(btn => {
-        if (btn.closest('#agencias') || btn.getAttribute('data-i18n') === 'agencias.cta') {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                toggleModal('demoModal', true);
-            });
-        }
-    });
+  // announce language change to screen readers
+  const announcer = document.getElementById('lang-announcer');
+  if (announcer) {
+    announcer.textContent = currentLang === 'es'
+      ? 'Idioma cambiado a espaÃ±ol'
+      : 'Language changed to English';
+  }
+}
 
-    // Modal 2: Apertura desde botón "Quiero explorar →"
-    document.getElementById('exploreBtn')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleModal('travelerModal', true);
-    });
+/**
+ * Initializes i18n on page load â€” loads English by default.
+ */
+async function initI18n() {
+  translations = await loadTranslations(currentLang);
+  applyTranslations();
+}
 
-    // Cierre interactivo para ambos modales (cruces, cancelar y fondo)
-    document.addEventListener('click', (e) => {
-        if (e.target.closest('#closeDemoBtn') || e.target.closest('#cancelDemoBtn')) {
-            toggleModal('demoModal', false);
-        }
-        if (e.target.closest('#closeTravelerBtn') || e.target.closest('#cancelTravelerBtn')) {
-            toggleModal('travelerModal', false);
-        }
-        if (e.target.classList.contains('modal-backdrop')) {
-            toggleModal(e.target.id, false);
-        }
-    });
-
-    // Envío y validación: Formulario B2B Agencias
-    document.addEventListener('submit', (e) => {
-        if (e.target.id === 'demoForm') {
-            e.preventDefault();
-            const status = document.getElementById('modalFeedback');
-            const isValid = ['modalAgency', 'modalRoute', 'modalWhatsapp'].every(
-                id => document.getElementById(id)?.value.trim()
-            );
-
-            if (!isValid) {
-                if (status) {
-                    status.className = 'form-status error';
-                    status.textContent = dict.modal?.feedback_error || 'Error: complete all fields.';
-                }
-                return;
-            }
-
-            if (status) {
-                status.className = 'form-status success';
-                status.textContent = dict.modal?.feedback_success || 'Success! We will contact you soon.';
-            }
-            setTimeout(() => toggleModal('demoModal', false), 1800);
-        }
-
-        // Envío y validación: Formulario B2C Viajeros
-        if (e.target.id === 'travelerForm') {
-            e.preventDefault();
-            const status = document.getElementById('travelerFeedback');
-            const isValid = ['travelerName', 'travelerRoute', 'travelerContact'].every(
-                id => document.getElementById(id)?.value.trim()
-            );
-
-            if (!isValid) {
-                if (status) {
-                    status.className = 'form-status error';
-                    status.textContent = dict.traveler_modal?.feedback_error || 'Error: complete all fields.';
-                }
-                return;
-            }
-
-            if (status) {
-                status.className = 'form-status success';
-                status.textContent = dict.traveler_modal?.feedback_success || 'Route info sent successfully!';
-            }
-            setTimeout(() => toggleModal('travelerModal', false), 1800);
-        }
-    });
-});
+document.addEventListener('DOMContentLoaded', initI18n);
