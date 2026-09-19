@@ -1,0 +1,70 @@
+{
+  "agencias": {
+    "tag": "PARA AGENCIAS Y GUÍAS",
+    "title": "Tu experiencia,<br><em>bien acompañada.</em>",
+    "description": "Comparte lo que haces mejor y crea una relación más cercana con quienes confían en tus recorridos.",
+    "check1": "Presenta tus recorridos con claridad",
+    "check2": "Acompaña mejor a cada grupo",
+    "check3": "Construye confianza desde el primer contacto",
+    "cta": "Hablemos &rarr;",
+    "image_alt": "Grupo de expedición y guías caminando sobre la cresta de una montaña al amanecer"
+  },
+  "viajeros": {
+    "tag": "PARA VIAJEROS",
+    "title": "Elige tu próxima<br><em>historia.</em>",
+    "description": "Hay un camino esperando por ti. Encuentra una experiencia que conecte con tu forma de descubrir el mundo.",
+    "check1": "Encuentra una experiencia que vaya contigo",
+    "check2": "Prepárate para disfrutar cada tramo",
+    "check3": "Viaja con más calma y confianza",
+    "cta": "Quiero explorar &rarr;",
+    "image_alt": "Trekkers recorriendo senderos escarpados con vistas panorámicas a picos nevados"
+  },
+  "modal": {
+    "eyebrow": "DEMOSTRACIÓN B2B",
+    "title": "Agendar Demostración Operativa",
+    "description": "Descubre cómo TourMate centraliza la telemetría y el monitoreo de rutas sin cobertura celular en tu agencia.",
+    "fields": {
+      "agency_label": "Nombre de la Agencia",
+      "agency_ph": "Ej. Andes Aventura SAC",
+      "route_label": "Ruta Principal de Operación",
+      "route_default": "Selecciona una ruta",
+      "route_1": "Salkantay Trek (Cusco)",
+      "route_2": "Circuito Huayhuash (Áncash)",
+      "route_3": "Cañón del Colca (Arequipa)",
+      "route_4": "Otra ruta remota de alta montaña",
+      "whatsapp_label": "WhatsApp Corporativo",
+      "whatsapp_ph": "+51 984 000 111"
+    },
+    "actions": {
+      "cancel": "Cancelar",
+      "submit": "Solicitar Demostración &rarr;"
+    },
+    "feedback_success": "¡Demostración solicitada con éxito! Nos comunicaremos con tu agencia a la brevedad.",
+    "feedback_error": "Por favor completa todos los campos requeridos."
+  },
+  "traveler_modal": {
+    "eyebrow": "VIAJEROS Y EXPEDICIONES",
+    "title": "Explora tu Próxima Ruta",
+    "description": "Encuentra expediciones protegidas con telemetría y navegación offline para tu nivel de experiencia.",
+    "fields": {
+      "name_label": "Tu Nombre",
+      "name_ph": "Ej. Marco Rodriguez",
+      "dest_label": "Expedición de Interés",
+      "dest_default": "Selecciona una expedición",
+      "dest_1": "Salkantay Trek 5D/4N (Cusco)",
+      "dest_2": "Circuito Huayhuash 8D (Áncash)",
+      "dest_3": "Cañón del Colca 2D (Arequipa)"
+    },
+    "fields_extra": {
+      "contact_label": "Correo o WhatsApp",
+      "contact_ph": "contacto@ejemplo.com o +51 987 654 321"
+    },
+    "actions": {
+      "cancel": "Cancelar",
+      "submit": "Quiero Información &rarr;"
+    },
+    "feedback_success": "¡Detalles de ruta enviados! Revisa tu bandeja o teléfono pronto.",
+    "feedback_error": "Por favor completa todos los campos para recibir la guía."
+  },
+  "lang_btn": "EN"
+}
