@@ -1,0 +1,70 @@
+{
+  "agencias": {
+    "tag": "FOR AGENCIES AND GUIDES",
+    "title": "Your experience,<br><em>well guided.</em>",
+    "description": "Share what you do best and build a closer connection with those who trust your expeditions.",
+    "check1": "Showcase your routes clearly",
+    "check2": "Better support every expedition group",
+    "check3": "Build trust from the very first contact",
+    "cta": "Let's talk &rarr;",
+    "image_alt": "Expedition group and mountain guides walking on a ridge at sunrise"
+  },
+  "viajeros": {
+    "tag": "FOR TRAVELERS",
+    "title": "Choose your next<br><em>story.</em>",
+    "description": "There is a trail waiting for you. Find an experience that truly connects with the way you explore the world.",
+    "check1": "Find an experience that fits your pace",
+    "check2": "Get ready to enjoy every step of the trail",
+    "check3": "Travel with greater calm and confidence",
+    "cta": "I want to explore &rarr;",
+    "image_alt": "Trekkers exploring rugged mountain trails with scenic views of snow-capped peaks"
+  },
+  "modal": {
+    "eyebrow": "B2B DEMO",
+    "title": "Schedule an Operations Demo",
+    "description": "Discover how TourMate centralizes telemetry and trail tracking without mobile coverage for your agency.",
+    "fields": {
+      "agency_label": "Agency Name",
+      "agency_ph": "e.g. Andes Aventura SAC",
+      "route_label": "Primary Operational Route",
+      "route_default": "Select a route",
+      "route_1": "Salkantay Trek (Cusco)",
+      "route_2": "Huayhuash Circuit (Áncash)",
+      "route_3": "Colca Canyon (Arequipa)",
+      "route_4": "Other high-mountain remote route",
+      "whatsapp_label": "Corporate WhatsApp",
+      "whatsapp_ph": "+51 984 000 111"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Request Demo &rarr;"
+    },
+    "feedback_success": "Demo requested successfully! We will contact your agency shortly.",
+    "feedback_error": "Please fill out all required fields."
+  },
+  "traveler_modal": {
+    "eyebrow": "TRAVELERS & EXPEDITIONS",
+    "title": "Explore Your Next Trail",
+    "description": "Find expeditions secured with biometric telemetry and offline tracking designed for your pace.",
+    "fields": {
+      "name_label": "Your Name",
+      "name_ph": "e.g. Marco Rodriguez",
+      "dest_label": "Expedition of Interest",
+      "dest_default": "Select an expedition",
+      "dest_1": "Salkantay Trek 5D/4N (Cusco)",
+      "dest_2": "Huayhuash Circuit 8D (Áncash)",
+      "dest_3": "Colca Canyon 2D (Arequipa)"
+    },
+    "fields_extra": {
+      "contact_label": "Email or WhatsApp",
+      "contact_ph": "contact@example.com or +51 987 654 321"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "submit": "Get Route Info &rarr;"
+    },
+    "feedback_success": "Trail details sent! Check your inbox or phone soon.",
+    "feedback_error": "Please complete all fields to get the guide."
+  },
+  "lang_btn": "ES"
+}
