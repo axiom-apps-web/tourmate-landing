@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="assets/styles/styles.css">
+    <meta name="description" content="TourMate — IoT platform for extreme adventure tourism in Peru. Monitor location, vital signs, and progress in real time.">
+    <meta name="keywords" content="TourMate, adventure tourism, IoT, trekking Peru, smartwatch, monitoring, Axiom">
+    <meta name="author" content="Axiom — UPC 2026">
+    <meta name="copyright" content="© 2026 TourMate — Axiom. All rights reserved.">
+
+    <!-- open graph locale -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="es_419">
+    <meta property="og:title" content="TourMate — Explore more. Worry less.">
+    <meta property="og:description" content="IoT platform for extreme adventure tourism in Peru.">
+    <meta property="og:type" content="website">
+
+    <title>Tourmate</title>
+
+    <link rel="icon" href="assets/images/tourmate-logo.png" type="image/png">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<main>
+
+    <div
+            id="lang-announcer"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            class="visually-hidden"
+    ></div>
+
+    <!--
+        navbar — fixed top navigation bar
+    -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+
+        <!-- brand logo -->
+        <a href="#inicio" class="nav-logo" aria-label="TourMate — go to home">
+            <img src="assets/images/Logo_Tourmate.jpeg" alt="TourMate logo" width="32" height="32" style="border-radius: 8px; object-fit: cover;">
+            <span class="nav-logo-text">Tourmate</span>
+        </a>
+
+        <!-- collapsible nav links — desktop center / mobile dropdown -->
+        <div class="nav-collapse" id="nav-collapse" role="menubar">
+            <ul class="nav-links" role="list">
+                <li role="none"><a href="#tourists" role="menuitem" data-i18n="nav.tourists">Tourists</a></li>
+                <li role="none"><a href="#agencies" role="menuitem" data-i18n="nav.agencies">Agencies</a></li>
+                <li role="none"><a href="#ecosystem" role="menuitem" data-i18n="nav.ecosystem">Ecosystem</a></li>
+                <li role="none"><a href="#novedades" role="menuitem" data-i18n="nav.novedades">News</a></li>
+                <li role="none"><a href="#plans" role="menuitem" data-i18n="nav.plans">Plans</a></li>
+                <li role="none"><a href="#about" role="menuitem" data-i18n="nav.about">About us</a></li>
+            </ul>
+        </div>
+
+        <!-- right-side actions: language toggle, hamburger, join cta -->
+        <div class="nav-actions">
+
+            <!-- language toggle pill -->
+            <button
+                    class="lang-toggle"
+                    onclick="toggleLanguage()"
+                    aria-label="Switch to Spanish"
+                    id="lang-toggle-btn"
+            >
+                <span class="lang-code" id="lang-code" aria-hidden="true">ES</span>
+                <span class="lang-flag-pill" id="lang-flag" aria-hidden="true">🇵🇪</span>
+            </button>
+
+            <!-- hamburger button — mobile only -->
+            <button
+                    class="hamburger-button"
+                    onclick="toggleMobileMenu()"
+                    aria-expanded="false"
+                    aria-controls="nav-collapse"
+                    aria-label="Toggle navigation menu"
+            >
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
+
+            <!-- cta — join, shared destination for all visitor profiles -->
+            <a
+                    href="#contact-humano"
+                    class="btn-join"
+                    id="nav-join-btn"
+                    data-i18n="nav.join"
+                    aria-label="Join"
+            >Join</a>
+        </div>
+
+    </nav>
+
+    <!--Sección Inicio-->
+        <section id="inicio" class="hero relative flex flex-col justify-end min-h-[730px] max-md:min-h-[700px] bg-cover bg-center md:bg-center max-md:bg-[62%_center]" style="background-image: url('assets/images/hero-expedition.png');">
+            <div class="absolute inset-0 bg-gradient-to-r from-[rgba(35,63,53,0.88)] via-[rgba(35,63,53,0.65)] to-[rgba(35,63,53,0.15)] z-0"></div>
+
+          <div class="relative z-10 w-[min(1160px,calc(100%-48px))] mx-auto mb-[105px] max-md:w-[min(100%-36px,560px)] max-md:mb-[85px]">
+            
+            <p class="text-[10px] font-[650] tracking-[.18em] uppercase text-[#efc5a6] mb-4" data-i18n="hero.tag">
+              More trail. Less noise.
+            </p>
+
+            <h1 class="text-[clamp(54px,8vw,104px)] max-md:text-[clamp(52px,14vw,75px)] font-[430] leading-[.96] tracking-[-.07em] text-[#fffefb] mb-6">
+                <span data-i18n="hero.title-main">Adventure tourism</span> <br class="hidden md:block" />
+                <em class="font-serif font-[400] text-[#efc5a6]" data-i18n="hero.title-em">without disconnecting</em> <span data-i18n="hero.title-end">from safety.</span>
+            </h1>
+
+            <p class="text-[16px] font-[400] leading-[1.6] text-[rgba(255,254,251,0.82)] max-w-[480px] mb-8" data-i18n="hero.description">
+              IoT monitoring, offline routes, and preventive control for agencies and travelers in low-connectivity areas.
+            </p>
+
+            <div class="flex flex-row max-md:flex-col gap-4 items-start max-md:gap-[20px]">
+              <a href="#tourists" class="inline-flex items-center gap-[10px] px-[18px] py-[13px] rounded-[999px] bg-[#fffefb] text-[#29433a] font-[600] text-[12px] transition-transform duration-200 hover:-translate-y-[2px] hover:bg-[#f1d4bd]" data-i18n="hero.cta-travelers">
+                Explore for Travelers
+              </a>
+              <a href="#agencies" class="inline-flex items-center gap-[10px] px-[18px] py-[13px] rounded-[999px] bg-[#29433a] text-[#fffefb] font-[600] text-[12px] transition-transform duration-200 hover:-translate-y-[2px] hover:bg-[#416253]" data-i18n="hero.cta-agencies">
+                Solutions for Agencies
+              </a>
+            </div>
+
+          </div>
+
+          <div class="relative z-10 w-[min(1160px,calc(100%-48px))] mx-auto pb-6 flex items-center gap-4 text-[rgba(255,254,251,0.62)] uppercase text-[9px] tracking-[.15em] max-md:w-[min(100%-36px,560px)]">
+            <span data-i18n="hero.footer-badge">Secure expeditions</span>
+            <div class="h-[1px] w-[100px] bg-[rgba(255,254,251,0.45)]"></div>
+          </div>
+        </section>
+        <!--Sección Inicio-->
+
+
+
+
+<!--Sección Visión-->
+
+        <section id="vision">
+
+            <div id="vision-info-container">
+                <div id="vision-info-left-container">
+                    <p data-i18n="vision.tag">A MORE NATURAL WAY TO EXPERIENCE TOURISM</p>
+                    <h2><span data-i18n="vision.title-pre">Everything starts with a good</span> <span data-i18n="vision.title-accent">connection.</span></h2>
+                </div>
+
+                <div id="vision-info-right-container">
+                    <p data-i18n="vision.description">
+                        Behind every tour there are people, places, and moments worth enjoying.
+                        TourMate was created to bring them closer with simplicity: a friendly experience for agencies, guides, and travelers.
+                    </p>
+
+                    <div id="conoce-propuesta-container">
+                        <a href="#agencias-viajeros">
+                            <span data-i18n="vision.cta">Discover the proposal</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vision-info-footer-container">
+                <div class="vision-subinfo-container">
+                    <span class="vision-icon"><i class="fa-solid fa-hands-holding-circle"></i></span>
+                    <h3 data-i18n="vision.clarity-title">More clarity</h3>
+                    <p data-i18n="vision.clarity-desc">The right amount of information to understand and enjoy each experience.</p>
+                </div>
+
+                <div class="vision-subinfo-container">
+                    <span class="vision-icon"><i class="fa-solid fa-handshake"></i></span>
+                    <h3 data-i18n="vision.trust-title">More trust</h3>
+                    <p data-i18n="vision.trust-desc">Close support before, during, and after the trip.</p>
+                </div>
+
+                <div class="vision-subinfo-container">
+                    <span class="vision-icon"><i class="fa-solid fa-heart"></i></span>
+                    <h3 data-i18n="vision.memories-title">More memories</h3>
+                    <p data-i18n="vision.memories-desc">Because what matters isn't just arriving, but everything that stays with you.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!--Sección Visión-->
+
+
+
+        <!--Sección Agencias y Viajeros-->
+
+<!-- SECCIÓN #agencias: For Agencies and Guides -->
+<section class="split-section section-agencias" id="agencias">
+    <div class="split-grid">
+        <div class="split-media media-agencias-wrapper">
+            <img
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80"
+                    alt="Expedition group and mountain guides walking on a ridge at sunrise"
+                    data-i18n-attr="alt:agencias.image_alt"
+                    class="media-img img-agencias"
+                    loading="lazy"
+            >
+        </div>
+
+        <article class="split-content bg-sage">
+            <span class="eyebrow" data-i18n="agencias.tag">FOR AGENCIES AND GUIDES</span>
+            <h2 class="split-title" data-i18n="agencias.title_html">
+                Your experience,<br>
+                <em>well guided.</em>
+            </h2>
+            <p class="split-description" data-i18n="agencias.description">
+                Share what you do best and build a closer connection with those who trust your expeditions.
+            </p>
+
+            <ul class="split-checklist">
+                <li>
+                    <span class="check-circle" aria-hidden="true"></span>
+                    <span data-i18n="agencias.check1">Showcase your routes clearly</span>
+                </li>
+                <li>
+                    <span class="check-circle" aria-hidden="true"></span>
+                    <span data-i18n="agencias.check2">Better support every expedition group</span>
+                </li>
+                <li>
+                    <span class="check-circle" aria-hidden="true"></span>
+                    <span data-i18n="agencias.check3">Build trust from the very first contact</span>
+                </li>
+            </ul>
+
+            <div class="split-action">
+                <a href="#contacto" class="button button-dark" data-i18n="agencias.cta">Let's talk &rarr;</a>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- SECCIÓN #viajeros: For Travelers -->
+<section class="split-section section-viajeros" id="viajeros">
+    <div class="split-grid">
+        <article class="split-content bg-travelers">
+            <span class="eyebrow" data-i18n="viajeros.tag">FOR TRAVELERS</span>
+            <h2 class="split-title" data-i18n="viajeros.title_html">
+                Choose your next<br>
+                <em>story.</em>
+            </h2>
+            <p class="split-description" data-i18n="viajeros.description">
+                There is a trail waiting for you. Find an experience that truly connects with the way you explore the world.
+            </p>
+
+            <ul class="split-checklist">
+                <li>
+                    <span class="check-circle" aria-hidden="true"></span>
+                    <span data-i18n="viajeros.check1">Find an experience that fits your pace</span>
+                </li>
+                <li>
+                    <span class="check-circle" aria-hidden="true"></span>
+                    <span data-i18n="viajeros.check2">Get ready to enjoy every step of the trail</span>
+                </li>
+                <li>
+                    <span class="check-circle" aria-hidden="true"></span>
+                    <span data-i18n="viajeros.check3">Travel with greater calm and confidence</span>
+                </li>
+            </ul>
+
+            <div class="split-action">
+                <a href="#inicio" class="text-link" data-i18n="viajeros.cta">I want to explore &rarr;</a>
+            </div>
+        </article>
+
+        <div class="split-media media-viajeros-wrapper">
+            <img
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=80"
+                    alt="Trekkers exploring rugged mountain trails with scenic views of snow-capped peaks"
+                    data-i18n-attr="alt:viajeros.image_alt"
+                    class="media-img img-viajeros"
+                    loading="lazy"
+            >
+        </div>
+    </div>
+</section>
+
+<script src="assets/i18n/i18n.js"></script>
+
+<!--Sección Agencias y Viajeros-->
+
+    <!--
+plans — pricing for tourists and agencies
+-->
+    <section class="plans" id="plans" aria-labelledby="plans-heading">
+
+        <span class="section-tag" data-i18n="plans.tag">Plans</span>
+        <h2 id="plans-heading" data-i18n="plans.title">Plans for every adventure</h2>
+        <p class="plans-subtitle" data-i18n="plans.subtitle">
+            Transparent, no surprises. The IoT is always provided by the agency, the tourist only needs the app.
+        </p>
+
+        <!-- tab toggle: tourists vs agencies -->
+        <div class="plans-toggle" role="tablist" aria-label="Plan type selector">
+            <button
+                    class="toggle-btn active"
+                    id="btn-tourists"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="tourist-plans"
+                    onclick="switchPlans('tourists')"
+                    data-i18n="plans.toggle-tourists"
+            >Tourists</button>
+            <button
+                    class="toggle-btn"
+                    id="btn-agencies"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="agency-plans"
+                    onclick="switchPlans('agencies')"
+                    data-i18n="plans.toggle-agencies"
+            >Agencies</button>
+        </div>
+
+        <!-- tourist plans -->
+        <div class="plans-grid active" id="tourist-plans" role="tabpanel" aria-labelledby="btn-tourists">
+
+            <!-- explorer plan — free -->
+            <div class="plan-card">
+                <p class="plan-tier" data-i18n="plans.explorer.tier">Explorer</p>
+                <h3 class="plan-title" data-i18n="plans.explorer.title">Free app for everyone</h3>
+                <p class="plan-desc" data-i18n="plans.explorer.description">
+                    Everything essential to participate in an agency-managed tour. No cost, no card.
+                </p>
+                <div class="plan-price">
+                    <div class="plan-price-main free" data-i18n="plans.explorer.price">Free</div>
+                    <p class="plan-price-note" data-i18n="plans.explorer.note"></p>
+                </div>
+                <ul class="plan-features" aria-label="Explorer plan features">
+                    <li>
+            <span class="group-lbl" data-i18n="plans.explorer.group-navigation">
+                <!-- navigation icon -->
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M8 2l1.5 4.5H14l-3.75 2.75 1.5 4.5L8 11l-3.75 2.75 1.5-4.5L2 6.5h4.5z"/>
+                </svg>
+                On-route navigation
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-offline-map">Downloadable offline route map (no signal)</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-checkpoints">Checkpoints marked on the map</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-danger-zones">Danger zones visible on route</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-gps">Your GPS position in real time</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.explorer.group-health">
+                <!-- watch icon -->
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="3" width="8" height="10" rx="2"/>
+                <path d="M6 1v2M10 1v2M6 13v2M10 13v2M8 6v3l2 1"/>
+                </svg>
+                Health via agency watch
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-heart-rate">View your current heart rate</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-oxygen">View your oxygen saturation (SpO₂)</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-auto-alerts">Automatic alerts to agency if anomaly</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.explorer.group-record">
+                <!-- camera icon -->
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M2 5a1 1 0 011-1h1.5l1-2h5l1 2H13a1 1 0 011 1v7a1 1 0 01-1 1H3a1 1 0 01-1-1V5z"/>
+                <circle cx="8" cy="8.5" r="2"/>
+                </svg>
+                Trip record
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-photos">Upload photos during route up to 20 photos</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.explorer.feat-geo-photos">View geo-contextual photos of other travelers</span></li>
+                </ul>
+                <button class="btn-plan" data-i18n="plans.explorer.cta" aria-label="Download Explorer plan">Download here</button>
+            </div>
+
+            <!-- trekker plan — featured -->
+            <div class="plan-card featured">
+                <p class="plan-tier" data-i18n="plans.trekker.tier">Trekker</p>
+                <h3 class="plan-title" data-i18n="plans.trekker.title">The complete experience</h3>
+                <p class="plan-desc" data-i18n="plans.trekker.description">
+                    For the adventurer who wants to record and relive every moment of their expedition.
+                </p>
+                <div class="plan-price">
+                    <div class="plan-price-main" data-i18n="plans.trekker.price">S/19</div>
+                    <p class="plan-price-note" data-i18n="plans.trekker.note">Monthly | 7-day free trial, no commitment</p>
+                </div>
+                <ul class="plan-features" aria-label="Trekker plan features">
+                    <li>
+            <span class="group-lbl" data-i18n="plans.trekker.group-navigation">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M8 2l1.5 4.5H14l-3.75 2.75 1.5 4.5L8 11l-3.75 2.75 1.5-4.5L2 6.5h4.5z"/>
+                </svg>
+                On-route navigation
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-includes-explorer">Everything in Explorer plan</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-unlimited-routes">Unlimited downloadable routes</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-history">Completed routes history</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.trekker.group-health">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="3" width="8" height="10" rx="2"/>
+                <path d="M6 1v2M10 1v2M6 13v2M10 13v2M8 6v3l2 1"/>
+                </svg>
+                Health via agency watch
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-realtime-vitals">Heart rate and SpO₂ in real time</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-vitals-graph">Historical vital signs graph for the tour</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-emergency-alerts">Automatic alerts to agency and emergency contact</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-emergency-contacts">Up to 3 emergency contacts</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.trekker.group-record">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M2 5a1 1 0 011-1h1.5l1-2h5l1 2H13a1 1 0 011 1v7a1 1 0 01-1 1H3a1 1 0 01-1-1V5z"/>
+                <circle cx="8" cy="8.5" r="2"/>
+                </svg>
+                Trip record
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-unlimited-photos">Unlimited photos with auto geo-tag</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-videos">Videos during the route up to 10 clips</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-journal">Auto-generated travel journal at end of tour</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.trekker.feat-export-journal">Export journal in PDF or share link</span></li>
+                </ul>
+                <button class="btn-plan orange-btn" data-i18n="plans.trekker.cta" aria-label="Try Trekker plan free for 7 days">Try 7 days free</button>
+            </div>
+
+            <!-- expedition plan -->
+            <div class="plan-card">
+                <p class="plan-tier" data-i18n="plans.expedition.tier">Expedition</p>
+                <h3 class="plan-title" data-i18n="plans.expedition.title">For frequent adventurers</h3>
+                <p class="plan-desc" data-i18n="plans.expedition.description">
+                    Multiple tours per year, unlimited journals and the best multimedia experience of each adventure.
+                </p>
+                <div class="plan-price">
+                    <div class="plan-price-main" data-i18n="plans.expedition.price">S/39</div>
+                    <p class="plan-price-note" data-i18n="plans.expedition.note">Monthly | Everything in Trekker, no limits</p>
+                </div>
+                <ul class="plan-features" aria-label="Expedition plan features">
+                    <li>
+            <span class="group-lbl" data-i18n="plans.expedition.group-navigation">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M8 2l1.5 4.5H14l-3.75 2.75 1.5 4.5L8 11l-3.75 2.75 1.5-4.5L2 6.5h4.5z"/>
+                </svg>
+                On-route navigation
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-includes-trekker">Everything in Trekker plan</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-public-profile">Public adventurer profile with your routes</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.expedition.group-health">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="3" width="8" height="10" rx="2"/>
+                <path d="M6 1v2M10 1v2M6 13v2M10 13v2M8 6v3l2 1"/>
+                </svg>
+                Health via agency watch
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-health-history">Accumulated health history across all tours</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-unlimited-contacts">Unlimited emergency contacts</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-medical-summary">Exportable post-tour medical summary (PDF)</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.expedition.group-record">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M2 5a1 1 0 011-1h1.5l1-2h5l1 2H13a1 1 0 011 1v7a1 1 0 01-1 1H3a1 1 0 01-1-1V5z"/>
+                <circle cx="8" cy="8.5" r="2"/>
+                </svg>
+                Trip record
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-unlimited-media">Unlimited photos and videos</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-unlimited-journals">Auto-generated journals, no tour limit</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-album">Personal album across all tours</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.expedition.feat-community">Contribute geo-contextual content to community</span></li>
+                </ul>
+                <button class="btn-plan" data-i18n="plans.expedition.cta" aria-label="Choose Expedition plan">Choose Expedition</button>
+            </div>
+
+        </div>
+
+        <!-- agency plans -->
+        <div class="plans-grid" id="agency-plans" role="tabpanel" aria-labelledby="btn-agencies">
+            <!-- base plan -->
+            <div class="plan-card">
+                <p class="plan-tier" data-i18n="plans.agency-base.tier">Base</p>
+                <h3 class="plan-title" data-i18n="plans.agency-base.title">For agencies getting started</h3>
+                <p class="plan-desc" data-i18n="plans.agency-base.description">
+                    Digitize your first tour operation with GPS monitoring and small group management.
+                </p>
+                <div class="plan-price">
+                    <div class="plan-price-main" data-i18n="plans.agency-base.price">S/299</div>
+                    <p class="plan-price-note" data-i18n="plans.agency-base.note">Monthly | Includes initial setup onboarding</p>
+                </div>
+                <ul class="plan-features" aria-label="Base agency plan features">
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-base.group-hardware">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="3" width="8" height="10" rx="2"/>
+                <path d="M6 1v2M10 1v2M6 13v2M10 13v2M8 6v3l2 1"/>
+                </svg>
+                IoT Hardware included
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-watches">Up to 5 smart watches managed</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-vitals-capture">Heart rate and SpO₂ capture on route</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-gps-watch">GPS geolocation by watch in real time</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-auto-sync">Auto sync when signal available</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-base.group-panel">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="1" y="2" width="14" height="10" rx="1"/>
+                <path d="M5 14h6M8 12v2"/>
+                </svg>
+                Web management panel
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-live-location">Real-time location of each active group</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-health-status">Health status by trekker (HR &amp; SpO₂)</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-active-tours">Up to 2 simultaneous active tours</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-guides">Up to 3 registered guides</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-base.feat-routes">Package and route management up to 5</span></li>
+                </ul>
+                <button class="btn-plan" data-i18n="plans.agency-base.cta" aria-label="Get started with Base agency plan">Get Started</button>
+            </div>
+
+            <!-- pro plan — featured -->
+            <div class="plan-card featured">
+                <p class="plan-tier" data-i18n="plans.agency-pro.tier">Pro</p>
+                <h3 class="plan-title" data-i18n="plans.agency-pro.title">Complete IoT operation</h3>
+                <p class="plan-desc" data-i18n="plans.agency-pro.description">
+                    For agencies operating multiple simultaneous tours with full field control,
+                    including Bluetooth checkpoints on route.
+                </p>
+                <div class="plan-price">
+                    <div class="plan-price-main" data-i18n="plans.agency-pro.price">S/599</div>
+                    <p class="plan-price-note" data-i18n="plans.agency-pro.note">Monthly | Includes Bluetooth checkpoint installation</p>
+                </div>
+                <ul class="plan-features" aria-label="Pro agency plan features">
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-pro.group-hardware">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="3" width="8" height="10" rx="2"/>
+                <path d="M6 1v2M10 1v2M6 13v2M10 13v2M8 6v3l2 1"/>
+                </svg>
+                IoT Hardware included
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-watches">Up to 20 smart watches managed</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-vitals-capture">Heart rate and SpO₂ capture on route</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-gps">GPS geolocation in real time</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-async-sync">Asynchronous sync (works without signal)</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-bluetooth">Bluetooth checkpoints on route up to 10 posts</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-checkpoint-record">Automatic checkpoint passage record</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-pro.group-panel">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="1" y="2" width="14" height="10" rx="1"/>
+                <path d="M5 14h6M8 12v2"/>
+                </svg>
+                Web management panel
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-live-map">Live map with all active groups</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-health-realtime">Real-time health status per trekker</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-unlimited-tours">Unlimited simultaneous active tours</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-unlimited-guides">Unlimited registered guides</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-management">Centralized guides, packages and IoT equipment management</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-pro.feat-mobile-access">Panel accessible from web and mobile app</span></li>
+                </ul>
+                <button class="btn-plan orange-btn" data-i18n="plans.agency-pro.cta" aria-label="Try Pro agency plan free for 7 days">Try 7 days free</button>
+            </div>
+
+            <!-- enterprise plan -->
+            <div class="plan-card">
+                <p class="plan-tier" data-i18n="plans.agency-enterprise.tier">Enterprise</p>
+                <h3 class="plan-title" data-i18n="plans.agency-enterprise.title">For large operators</h3>
+                <p class="plan-desc" data-i18n="plans.agency-enterprise.description">
+                    Dedicated infrastructure, personalized hardware and 24/7 support for large-scale operations.
+                </p>
+                <div class="plan-price">
+                    <div class="plan-price-main free" data-i18n="plans.agency-enterprise.price">Custom</div>
+                    <p class="plan-price-note" data-i18n="plans.agency-enterprise.note">Talk to our team — Demo included</p>
+                </div>
+                <ul class="plan-features" aria-label="Enterprise agency plan features">
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-enterprise.group-hardware">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="3" width="8" height="10" rx="2"/>
+                <path d="M6 1v2M10 1v2M6 13v2M10 13v2M8 6v3l2 1"/>
+                </svg>
+                IoT Hardware at scale
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-unlimited-watches">Unlimited smart watches</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-unlimited-checkpoints">Unlimited Bluetooth checkpoints</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-custom-hardware">Hardware customizable by tour type and route</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-maintenance">Preventive device maintenance included</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-enterprise.group-platform">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="1" y="2" width="14" height="10" rx="1"/>
+                <path d="M5 14h6M8 12v2"/>
+                </svg>
+                Dedicated platform
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-includes-pro">Everything in Pro plan included</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-private-server">Private server or dedicated cloud</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-sla">99.9% uptime guaranteed SLA</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-white-label">White-label (your brand on the platform)</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-api">REST API to integrate with your CRM or ERP</span></li>
+                    <li>
+            <span class="group-lbl" data-i18n="plans.agency-enterprise.group-support">
+                <svg class="group-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M8 2a6 6 0 100 12A6 6 0 008 2zM4 8a4 4 0 014-4M8 6v2l1.5 1.5"/>
+                </svg>
+                Dedicated 24/7 support
+            </span>
+                    </li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-onboarding">Onboarding and on-site training</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-support-line">24/7 support with dedicated direct line</span></li>
+                    <li><span class="tick" aria-hidden="true">✓</span><span data-i18n="plans.agency-enterprise.feat-success-manager">Assigned customer success manager</span></li>
+                </ul>
+                <a href="#contact-humano" class="btn-plan" data-i18n="plans.agency-enterprise.cta" aria-label="Contact us for Enterprise plan">Contact us</a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Sección Team Development -->
+
+    <section id="about">
+
+        <div class="container team-wrap">
+
+            <!-- Introducción -->
+            <div class="team-intro">
+
+                <p class="eyebrow" data-i18n="team-dev.tag">TEAM DEVELOPMENT</p>
+
+                <h2 data-i18n="team-dev.title_html">
+                    Construimos el viaje<br>
+                    <em>en equipo.</em>
+                </h2>
+
+                <p data-i18n="team-dev.description">
+                    Las mejores experiencias nacen cuando agencias, guías y personas
+                    trabajan con una misma visión: hacer que cada recorrido sea más
+                    cercano, claro y memorable.
+                </p>
+
+            </div>
+
+            <!-- Integrantes del equipo -->
+            <div class="team-members">
+
+                <article class="member-card">
+                    <div class="member-photo">
+                        <img src="./assets/images/carrillo.png" alt="Foto de Matias Carrillo" data-i18n-attr="alt:team-dev.member-carrillo-alt">
+                    </div>
+                    <div class="member-info">
+                        <h3>Matias Carrillo</h3>
+                        <p data-i18n="team-dev.member-carrillo-role">Dirección de producto</p>
+                        <span data-i18n="team-dev.member-carrillo-desc">Define la visión del proyecto y coordina las prioridades del producto.</span>
+                        <div class="member-social" aria-label="Redes sociales de Matias Carrillo">
+                            <a href="#" aria-label="Facebook de Matias Carrillo"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter de Matias Carrillo"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Instagram de Matias Carrillo"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="member-card">
+                    <div class="member-photo">
+                        <img src="./assets/images/huingo.png" alt="Foto de Frank Huingo" data-i18n-attr="alt:team-dev.member-huingo-alt">
+                    </div>
+                    <div class="member-info">
+                        <h3>Frank Huingo</h3>
+                        <p data-i18n="team-dev.member-huingo-role">Estrategia y operaciones</p>
+                        <span data-i18n="team-dev.member-huingo-desc">Organiza procesos y orienta las decisiones para el funcionamiento del proyecto.</span>
+                        <div class="member-social" aria-label="Redes sociales de Frank Huingo">
+                            <a href="#" aria-label="Facebook de Frank Huingo"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter de Frank Huingo"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Instagram de Frank Huingo"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="member-card">
+                    <div class="member-photo">
+                        <img src="./assets/images/quispe.png" alt="Foto de Tony Quispe" data-i18n-attr="alt:team-dev.member-quispe-alt">
+                    </div>
+                    <div class="member-info">
+                        <h3>Tony Quispe</h3>
+                        <p data-i18n="team-dev.member-quispe-role">Desarrollo de software</p>
+                        <span data-i18n="team-dev.member-quispe-desc">Implementa la plataforma y desarrolla las funcionalidades principales.</span>
+                        <div class="member-social" aria-label="Redes sociales de Tony Quispe">
+                            <a href="#" aria-label="Facebook de Tony Quispe"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter de Tony Quispe"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Instagram de Tony Quispe"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="member-card">
+                    <div class="member-photo">
+                        <img src="./assets/images/verastigue.png" alt="Foto de Giancarlo Verastigue" data-i18n-attr="alt:team-dev.member-verastigue-alt">
+                    </div>
+                    <div class="member-info">
+                        <h3>Giancarlo Verastigue</h3>
+                        <p data-i18n="team-dev.member-verastigue-role">Diseño y experiencia</p>
+                        <span data-i18n="team-dev.member-verastigue-desc">Diseña la interfaz y busca una experiencia clara para los usuarios.</span>
+                        <div class="member-social" aria-label="Redes sociales de Giancarlo Verastigue">
+                            <a href="#" aria-label="Facebook de Giancarlo Verastigue"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter de Giancarlo Verastigue"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Instagram de Giancarlo Verastigue"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="member-card">
+                    <div class="member-photo">
+                        <img src="./assets/images/molina.jpg" alt="Foto de Manuel Molina" data-i18n-attr="alt:team-dev.member-molina-alt">
+                    </div>
+                    <div class="member-info">
+                        <h3>Manuel Molina</h3>
+                        <p data-i18n="team-dev.member-molina-role">Comunidad y alianzas</p>
+                        <span data-i18n="team-dev.member-molina-desc">Gestiona la relación con usuarios, agencias y posibles aliados.</span>
+                        <div class="member-social" aria-label="Redes sociales de Manuel Molina">
+                            <a href="#" aria-label="Facebook de Manuel Molina"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter de Manuel Molina"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Instagram de Manuel Molina"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Sección Team Development -->
+
+    <!--Sección Contacto y Footer-->
+    <!--
+        faq — conversational, keyboard-accessible accordion using native <details>/<summary>
+    -->
+    <section class="faq" id="faq" aria-labelledby="faq-heading">
+
+        <span class="section-tag" data-i18n="faq.tag">Frequently asked questions</span>
+        <h2 id="faq-heading" data-i18n="faq.title">Questions? We're happy to answer them.</h2>
+
+        <div class="faq-list">
+
+            <details class="faq-item">
+                <summary data-i18n="faq.q1">What happens to my tourists' data?</summary>
+                <p data-i18n="faq.a1_html">
+                    It's encrypted and used only to keep your tours safe, we never sell it.
+                    Full details in our <a href="privacy.html">Privacy Policy</a>.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq.q2">Do you help us implement it?</summary>
+                <p data-i18n="faq.a2">
+                    Yes. Every agency plan includes onboarding, guide training, and initial hardware setup.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq.q3">Does it work without internet signal?</summary>
+                <p data-i18n="faq.a3">
+                    Yes. TourMate is built for the backcountry: it stores data locally and syncs
+                    automatically the moment a signal is available.
+                </p>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq.q4">What if a tourist has a real medical emergency?</summary>
+                <p data-i18n="faq.a4">
+                    TourMate is a monitoring and alert tool, not a replacement for emergency services,
+                    but it gives your guide the information they need to respond fast.
+                </p>
+            </details>
+
+
+        </div>
+
+    </section>
+
+    <!--
+        contact-humano — human contact channels, distinct from the footer's cold directory.
+        Shared CTA .
+    -->
+    <section class="contact-humano" id="contact-humano" aria-labelledby="contact-humano-heading">
+
+        <span class="section-tag" data-i18n="contact.tag">Talk to a human</span>
+        <h2 id="contact-humano-heading" data-i18n="contact.title">We're here to help you get started</h2>
+        <p class="contact-humano-desc" data-i18n="contact.description">
+            No forms, no waiting on hold. Reach us directly through whichever channel feels easiest.
+        </p>
+
+        <div class="contact-channels" role="list" aria-label="Ways to reach TourMate">
+
+            <a
+                    class="contact-channel"
+                    role="listitem"
+                    href="https://wa.me/51922119422"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Chat with TourMate on WhatsApp"
+            >
+                <svg class="contact-channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                    <path d="M3 21l1.65-4.95A9 9 0 1112 21a8.96 8.96 0 01-4.5-1.2L3 21z"/>
+                    <path d="M8.5 9.5c.3 2.5 2.5 4.7 5 5"/>
+                </svg>
+                <span data-i18n="contact.whatsapp-label">Chat on WhatsApp</span>
+            </a>
+
+            <a
+                    class="contact-channel"
+                    role="listitem"
+                    href="mailto:TourMateperu@gmail.com?subject=Solicitud%20de%20join%20TourMate"
+                    aria-label="Schedule a call with TourMate by email"
+            >
+                <svg class="contact-channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <path d="M16 2v4M8 2v4M3 10h18"/>
+                </svg>
+                <span data-i18n="contact.call-label">Schedule a call</span>
+            </a>
+
+            <a
+                    class="contact-channel"
+                    role="listitem"
+                    href="mailto:TourMateperu@gmail.com"
+                    aria-label="Email TourMate"
+            >
+                <svg class="contact-channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <span data-i18n="contact.email-label">Send us an email</span>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!--
+         footer — navigation, social links and legal
+     -->
+    <footer role="contentinfo">
+        <div class="footer-grid">
+
+            <!-- brand column -->
+            <div>
+                <div class="footer-logo">
+                    <img src="assets/images/Logo_Tourmate.jpeg" alt="TourMate" width="48" height="48" style="border-radius: 8px; object-fit: cover;">
+                    <span class="footer-logo-name">TourMate</span>
+                </div>
+                <p class="footer-tagline" data-i18n="footer.tagline">
+                    IoT platform for extreme adventure tourism in Peru and Latin America.
+                </p>
+            </div>
+
+            <!-- site navigation column -->
+            <nav class="footer-col" aria-label="Footer navigation">
+                <h5 data-i18n="footer.nav-title">Navigation</h5>
+                <ul role="list">
+                    <li><a href="#tourists" data-i18n="footer.nav-tourists">Tourists</a></li>
+                    <li><a href="#agencies" data-i18n="footer.nav-agencies">Agencies</a></li>
+                    <li><a href="#ecosystem" data-i18n="footer.nav-ecosystem">Ecosystem</a></li>
+                    <li><a href="#plans" data-i18n="footer.nav-plans">Plans</a></li>
+                    <li><a href="#about" data-i18n="footer.nav-about">About us</a></li>
+                    <li><a href="#faq" data-i18n="footer.nav-faq">FAQ</a></li>
+                    <li><a href="#contact-humano" data-i18n="footer.nav-contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- social networks column -->
+            <nav class="footer-col" aria-label="Social media links">
+                <h5 data-i18n="footer.social-title">Social networks</h5>
+                <ul role="list">
+                    <li>
+                        <a href="#" aria-label="Visit TourMate on Facebook">
+                            <img src="assets/images/Facebook_logo_(square).png" alt="" class="social-icon-img" aria-hidden="true" width="20" height="20">
+                            <span data-i18n="footer.facebook">Facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="Visit TourMate on TikTok">
+                            <img src="assets/images/tiktok-logo-tik-tok-logo-icon-png-svg.png" alt="" class="social-icon-img" aria-hidden="true" width="20" height="20">
+                            <span data-i18n="footer.tiktok">TikTok</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="Visit TourMate on Instagram">
+                            <img src="assets/images/vecteezy_instagram-social-media-logo-icons-instagram-icon_31737200.png" alt="" class="social-icon-img" aria-hidden="true" width="20" height="20">
+                            <span data-i18n="footer.instagram">Instagram</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- contact column -->
+            <address class="footer-col" aria-label="Contact information">
+                <h5 data-i18n="footer.contact-title">Contacts</h5>
+                <div class="contact-item">
+                    <!-- phone icon -->
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    <a href="tel:+51922119422" data-i18n="footer.phone">+51 922119422</a>
+                </div>
+                <div class="contact-item">
+                    <!-- email icon -->
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <a href="mailto:TourMateperu@gmail.com" data-i18n="footer.email">TourMateperu@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <!-- location pin icon -->
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span data-i18n="footer.location">Lima, Perú</span>
+                </div>
+            </address>
+
+        </div>
+
+        <!-- bottom bar with copyright and legal links -->
+        <div class="footer-bottom">
+            <span data-i18n="footer.copyright">© 2026 TourMate — Axiom. All rights reserved.</span>
+            <div class="footer-bottom-links">
+                <a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+                <a href="terms.html" data-i18n="footer.terms">Terms and conditions</a>
+            </div>
+        </div>
+
+    </footer>
+    <!--Sección Contacto y Footer-->
+</main>
+
+<script src="assets/i18n/i18n.js"></script>
+<script src="assets/scripts/main.js"></script>
+<script src="assets/scripts/visitor.js"></script>
+</body>
+</html>
