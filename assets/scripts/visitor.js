@@ -63,4 +63,50 @@ function initScrollReveal() {
     }, { threshold: 0.3 });
     steps.forEach(step => observer.observe(step));
 }
+/**
+ * Animates each `.counter-number[data-target]` from 0 to its target value
+ * once it enters the viewport. Jumps straight to the final value when the
+ * user prefers reduced motion.
+ */
+function initCounters() {
+    const counters = document.querySelectorAll('.counter-number[data-target]');
+    if (!counters.length) {
+        return;
+    }
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const DURATION_MS = 1200;
+    const animateCounter = el => {
+        const target = Number(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        if (prefersReducedMotion) {
+            el.textContent = target + suffix;
+            return;
+        }
+        const startTime = performance.now();
+        const tick = now => {
+            const progress = Math.min((now - startTime) / DURATION_MS, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target) + suffix;
+            if (progress < 1) {
+                requestAnimationFrame(tick);
+            }
+        };
+        requestAnimationFrame(tick);
+    };
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+    counters.forEach(counter => observer.observe(counter));
+}
+document.addEventListener('DOMContentLoaded', () => {
+    initVisitorTracking();
+    initBannerDismiss();
+    initScrollReveal();
+    initCounters();
+});
 
