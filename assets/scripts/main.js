@@ -19,3 +19,12 @@ function switchPlans(planType) {
         btnAgencies.setAttribute('aria-selected', 'true');
     }
 }
+
+function toggleMobileMenu() {
+    const navCollapse = document.getElementById('nav-collapse');
+    const hamburger = document.querySelector('.hamburger-button');
+    if (navCollapse && hamburger) {
+        const isOpen = navCollapse.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', isOpen);
+    }
+}
