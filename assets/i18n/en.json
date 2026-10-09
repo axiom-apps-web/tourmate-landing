@@ -8,6 +8,14 @@
     "novedades": "News",
     "join": "Join"
   },
+  "preview": {
+    "tag": "A look at Tourmate",
+    "title-main":"Everything you need,",
+    "title-em": "all in one place.",
+    "description": "A digital experience designed to make every journey feel clear, personal and easy to enjoy.",
+    "cta": "Open platform",
+    "caption": "A platform that supports every step"
+  },
   "team-dev": {
   "tag": "TEAM DEVELOPMENT",
   "title_html": "We build the journey<br><em>as a team.</em>",

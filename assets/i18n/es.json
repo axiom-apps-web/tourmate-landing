@@ -9,6 +9,14 @@
     "novedades": "Novedades",
     "join": "Unirse"
   },
+  "preview": {
+    "tag": "Una vista a Tourmate",
+    "title-main":"Todo lo que necesitas,",
+    "title-em": "en un solo lugar.",
+    "description": "Una experiencia digital diseñada para que cada viaje se sienta claro, personal y fácil de divertirse.",
+    "cta": "Abrir plataforma",
+    "caption": "Una plataforma que te acompaña paso a paso"
+  },
   "banner": {
     "text": "Novedades desde tu última visita →"
   },
